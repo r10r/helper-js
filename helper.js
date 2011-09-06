@@ -1,4 +1,4 @@
-var helper {
+var helper = {
   /**
   * If a console is defined (e.g: firebug, chrome developer tools) it
   * logs out the given message to the console
