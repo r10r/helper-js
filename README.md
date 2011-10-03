@@ -22,3 +22,4 @@ Currently helper.js is tested with firefox-3 and chrome-12 only.
 Documentation is done using JSDoc.
 
 - [JSDoc Tag Reference](http://code.google.com/p/jsdoc-toolkit/wiki/TagReference)
+- [JSDoc Codeview template](http://www.thebrightlines.com/article-data/downloads/codeview.1.2.zip)

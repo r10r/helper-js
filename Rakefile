@@ -13,7 +13,7 @@ desc 'generates the javascript documentation ind /doc using JSDoc'
 task :documentation do
   basepath = File.dirname(__FILE__)
   docoutputpath = File.join(basepath, 'doc')
-  jsdocpath = File.join(basepath, 'external/jsdoc_toolkit-2.4.0')
+  jsdocpath = File.join(basepath, 'external/jsdoc_toolkit-2.4.0/jsdoc-toolkit')
   jsdoctemplatepath = File.join(basepath, 'external/codeview_1.2')
   srcFiles = ['helper.js'].collect {|filename| File.join(basepath, 'public', filename)}
   
