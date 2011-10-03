@@ -204,12 +204,30 @@ var helper = {
     return parameterString;
   },
   
+  /**
+  * Make a GET request. The given parameter hash is converted to
+  * a parameter string.
+  *
+  * @param {Object} request the request literal
+  * @param {Object} params the request parameters hash
+  * @param {Boolean} sync if true request is made synchronous
+  * @example helper.doGet({url: '/foo'}, {param1: 'bar'});
+  */
   doGet: function(request, params, sync) {
     request.method = 'GET';
     request.url += "?" + this._encodeParameterHash(params);
     return this.doXHR(request, sync);
   },
   
+  /**
+  * Make a POST request. The given parameter hash is converted to
+  * a parameter string.
+  *
+  * @param {Object} request the request literal
+  * @param {Object} params the request parameters hash
+  * @param {Boolean} sync if true request is made synchronous
+  * @example helper.doPost({url: '/foo'}, {param1: 'bar'});
+  */
   doPost: function(request, params, sync) {
     request.method = 'POST';
     request['headers'] = request.headers || {}; 
