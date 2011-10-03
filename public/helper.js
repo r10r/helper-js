@@ -23,5 +23,30 @@ var helper = {
   			formatted = formatted.replace(regexp, arguments[i]);
     }
   	return formatted;
+  },
+  
+  /**
+  * Binds a single event listener for the given event type
+  * to the window object. The given callback function is
+  * executed if the event source element class 
+  * attribute matches the given CSS class.
+  * The first parameter of the callback function is source element,
+  * the second parameter the event.
+  *
+  * helper.addEventListener('click', 'foo', function(src, event){alert(src.innerHTML;)});
+  */
+  bind: function(eventType, cssClass, callback) {
+    window.addEventListener('click', function(event) {
+      var src = event.srcElement;
+      if (src.getAttribute) {
+        var value = src.getAttribute('class');
+        if (value) {
+          var classes = value.split(/ +/);
+          if (classes.indexOf(cssClass) > -1) {
+            callback(src, event);
+          }
+        }
+      }
+    }, true);
   }
 }
