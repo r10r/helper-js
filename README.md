@@ -1,6 +1,6 @@
 # About
 
-helper.js is a minimal collection of outstanding usefull javascript helper functions.
+helper.js is a minimal collection of outstanding useful javascript helper functions.
 helper.js is not intended to be an alternative for javascript frameworks like [jQuery](http://jquery.com/),
 [prototype](http://www.prototypejs.org/), etc. ...
 
