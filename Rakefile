@@ -1,12 +1,17 @@
 require 'rubygems'
 require 'jsmin_c'
-require 'packr'
+require 'yui/compressor'
 
 desc 'minify the javascript'
 task :minify do
-  code = File.read('public/helper.js')
-  compressed = Packr.pack(code, :shrink_vars => true, :base62 => true)
-  File.open('public/helper.min.js', 'wb') { |f| f.write(compressed) } 
+  compressor = YUI::JavaScriptCompressor.new({:munge => true})
+  File.open("public/helper.js", "r") do |source|
+    compressor.compress(source) do |compressed|
+      File.open('public/helper.min.js', 'w') do |file|
+        file.write(compressed.read());
+      end
+    end
+  end
 end
 
 desc 'generates the javascript documentation ind /doc using JSDoc'
