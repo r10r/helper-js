@@ -1,8 +1,10 @@
 /** @namespace */
 var helper = {
   /**
-  * If a console is defined (e.g: firebug, chrome developer tools) it
-  * logs out the given message to the console.
+  * If a console object is defined (e.g: when using firebug, chrome developer tools),
+  * this function uses it to display the given message. If no console object is defined
+  * them message is just put away.
+  *
   * @param {String} message the message
   */
   log: function(message) {
@@ -13,13 +15,14 @@ var helper = {
   
   /**
   * Format the given string. The remaining arguments replace the format specifies in the given string.
-  * The format specifiers are of the form '{0}', '{1}' ... '{xxxx}' 
+  * The format specifiers are of the form '{0}', '{1}' ... '{xxxx}'.
   * The first remaining argument replaces all occurences of the format specifier '{0}' and so on ...
+  *
   * @param {String} format the format string
-  * @param {String[]} first value is the format string, remaining arguments are the format values
+  * @param {String...} values the format values
   * @returns the formated string
-  * @example >helper.format('{0} {1}', 'Hello', 'World');
-  * 'Hello World'
+  * @example >helper.format('{0} {1} {0}', 'Hello', 'World');
+  * 'Hello World Hello'
   */
   format: function(format) {
     var formatted = format;
@@ -38,7 +41,7 @@ var helper = {
   * attribute matches the given CSS class.
   * The first parameter of the callback function is the source element,
   * the second parameter the event.
-
+  *
   * @param {String} eventType the event to bind to e.g 'click'
   * @param {String} cssClass the CSS class of the source elements to handle
   * @param {Function} callback function to execute for the event
