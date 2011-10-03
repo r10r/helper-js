@@ -1,0 +1,35 @@
+<script type="text/javascript" src="/helper.js"></script>
+<style type="text/css">
+.item {
+  width: 100px;
+  margin: 10px;
+  padding: 10px;
+  background-color: red;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#pressed {
+  border: 1px solid black;
+  width: 200px;
+  height: 100px;
+  padding: 10px;
+}
+</style>
+
+<% 3.times do |index| %>
+<span class='item foo'>by class <%= index %></span>
+<% end %>
+<span class="item">no event</span>
+<span class="item" id='bar'>by id</span>
+<div id="pressed"></div>
+
+<script type="text/javascript">
+helper.bind('click', '.foo', function(src) {
+  document.getElementById('pressed').innerHTML = src.innerHTML;
+});
+helper.bind('click', '#bar', function(src) {
+  document.getElementById('pressed').innerHTML = src.innerHTML;
+});
+</script>

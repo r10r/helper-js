@@ -1,0 +1,16 @@
+<script type="text/javascript" src="/helper.js"></script>
+
+<span>Load Time (must not change)</span>
+<span id='loadtime'><%= Time.now.to_s %></span>
+<br />
+<button id='get_time'>Current Time</button>
+<span id="current_time"></span>
+
+<script type="text/javascript">
+helper.bind('click', '#get_time', function() {
+  helper.fireXHR({method: 'GET', url: '/time', onsuccess: function(xhr){
+      helper.setHTML('current_time', xhr.response);
+    }
+  });
+})
+</script>
