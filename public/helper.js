@@ -163,7 +163,7 @@ var helper = {
   * @param {Boolean} [sync] if true the request is made synchronous
   * @example helper.fireXHR({method: 'POST', url: 'http://foo.bar'});
   */
-  fireXHR: function(request, sync) {
+  doXHR: function(request, sync) {
     var xhr = this.createXHR();
     var async = (sync == undefined) ? true : !sync;
     xhr.open(request.method, request.url, async);
@@ -188,5 +188,33 @@ var helper = {
       }
     }
     xhr.send(request.body || '');
+  },
+
+  /**
+  * @param params the parameter hash
+  */
+  _encodeParameterHash: function(params) {
+    var parameterString = '';
+    for (var name in params) {
+      if (parameterString.length > 0) {
+        parameterString += '&';
+      }
+      parameterString += this.format('{0}={1}', name, encodeURI(params[name]));
+    }
+    return parameterString;
+  },
+  
+  doGet: function(request, params, sync) {
+    request.method = 'GET';
+    request.url += "?" + this._encodeParameterHash(params);
+    return this.doXHR(request, sync);
+  },
+  
+  doPost: function(request, params, sync) {
+    request.method = 'POST';
+    request['headers'] = request.headers || {}; 
+    request.headers["Content-Type"] = "application/x-www-form-urlencoded";
+    request.body = this._encodeParameterHash(params);
+    return this.doXHR(request, sync);
   }
 }

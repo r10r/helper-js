@@ -9,7 +9,14 @@ get '/time' do
   Time.now.to_s
 end
 
+post '/name' do
+  params[:firstname] + " " + params[:lastname]
+end
+
+get '/name' do
+  params[:firstname] + " " + params[:lastname]
+end
+
 get '/:page' do
   erb params[:page].to_sym
 end
-

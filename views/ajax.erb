@@ -1,16 +1,60 @@
 <script type="text/javascript" src="/helper.js"></script>
+<style type="text/css">
+.example {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid black;
+}
+.target {
+  margin-left: 20px;
+}
+</style>
 
+
+<h1>XHR</h1>
 <span>Load Time (must not change)</span>
 <span id='loadtime'><%= Time.now.to_s %></span>
-<br />
-<button id='get_time'>Current Time</button>
-<span id="current_time"></span>
 
-<script type="text/javascript">
-helper.bind('click', '#get_time', function() {
-  helper.fireXHR({method: 'GET', url: '/time', onsuccess: function(xhr){
-      helper.setHTML('current_time', xhr.response);
-    }
+<div class="example">
+  <h2>GET without parameters</h2>
+  <button id='get_time'>GET current time</button>
+  <span class="target" id="current_time"></span>
+  <script type="text/javascript">
+  helper.bind('click', '#get_time', function() {
+    helper.doXHR({method: 'GET', url: '/time', onsuccess: function(xhr){
+        helper.setHTML('current_time', xhr.response);
+      }
+    });
   });
-})
-</script>
+  </script>
+</div>
+
+<div class="example">
+  <h2>GET with parameters</h2>
+  <button id='name_get_button'>get name using GET</button>
+  <span class="target" id="name_get"></span>
+  <script type="text/javascript">
+  helper.bind('click', '#name_get_button', function() {
+    helper.doGet({url: '/name', 
+      onsuccess: function(xhr){
+        helper.setHTML('name_get', xhr.response);
+      }}, {firstname: 'Jim', lastname: 'Jones'}
+     );
+  });
+  </script>
+</div>
+
+<div class="example">
+  <h2>POST with parameters</h2>
+  <button id='name_post_button'>get name using POST</button>
+  <span class="target" id="name_post"></span>
+  <script type="text/javascript">
+  helper.bind('click', '#name_post_button', function() {
+    helper.doPost({url: '/name', 
+      onsuccess: function(xhr){
+        helper.setHTML('name_post', xhr.response);
+      }}, {firstname: 'Jim', lastname: 'Jones'}
+     );
+  });
+  </script>
+</div>
