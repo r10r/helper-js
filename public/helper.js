@@ -35,6 +35,59 @@ var helper = {
   },
   
   /**
+  * Set the innerHTML of the element with the given id
+  * @param {String} id the element id
+  * @param {String} html the content to set
+  */
+  setHTML: function(id, html) {
+    document.getElementById(id).innerHTML = html;
+  },
+  
+  /**
+  * Bind the given callback function to a class of elements
+  * for the given event.
+  * @param {String} eventType eventType the event to bind to e.g 'click'
+  * @param {String} cssClass the class attribute of the target elements
+  * @param {Function} callback function to execute for the event
+  * @see helper#bind
+  */
+  bindToClass: function(eventType, cssClass, callback) {
+    window.addEventListener(eventType, function(event) {
+        var src = event.srcElement;
+        if (src.getAttribute) {
+          var value = src.getAttribute('class');
+          if (value) {
+            var classes = value.split(/ +/);
+            if (classes.indexOf(cssClass) > -1) {
+              callback(src, event);
+            }
+          }
+        }
+      }, true);
+  },
+  
+  /**
+  * Bind the given callback function to a single element 
+  * identified by the given id.
+  *
+  * @param {String} eventType eventType the event to bind to e.g 'click'
+  * @param {String} id the id attribute of the target element
+  * @param {Function} callback function to execute for the event
+  * @see helper#bind
+  */
+  bindToId: function(eventType, id, callback) {
+    var target = document.getElementById(id);
+    if (target) {
+      target.addEventListener(eventType, function(event) {
+        var src = event.srcElement;
+        callback(src, event);
+      }, true);
+    } else {
+      this.log(this.format('bindToId() element with id[{0}] does not exist!', id));
+    }
+  },
+  
+  /**
   * Binds a single event listener for the given event type
   * to the window object. The given callback function is
   * executed if the event source element class 
@@ -43,28 +96,32 @@ var helper = {
   * the second parameter the event.
   *
   * @param {String} eventType the event to bind to e.g 'click'
-  * @param {String} cssClass the CSS class of the source elements to handle
+  * @param {String} selector the CSS selector for target, either a CSS class or an Id
   * @param {Function} callback function to execute for the event
-  * @example helper.bind('click', 'foo', function(src, event){alert(src.innerHTML;)});
+  * @param {Node} callback.src the event source element
+  * @param {Event} callback.event the event object
+  * @example helper.bind('click', '#foo', function(src, event){alert(src.innerHTML;)}); // by id
+  * helper.bind('click', '.foo', function(src, event){alert(src.innerHTML;)}); // by class
   */
-  bind: function(eventType, cssClass, callback) {
-    window.addEventListener('click', function(event) {
-      var src = event.srcElement;
-      if (src.getAttribute) {
-        var value = src.getAttribute('class');
-        if (value) {
-          var classes = value.split(/ +/);
-          if (classes.indexOf(cssClass) > -1) {
-            callback(src, event);
-          }
-        }
-      }
-    }, true);
+  bind: function(eventType, selector, callback) {
+    var selector_first = selector.charAt(0);
+    var is_id_selector = (selector_first == '#');
+    var is_class_selector = (selector_first == '.');
+    var selector_name = selector.substring(1);
+    
+    if (is_id_selector) {
+      this.bindToId(eventType,selector_name, callback);
+    } else if (is_class_selector) {
+      this.bindToClass(eventType, selector_name, callback);
+    } else {
+      this.log('bind() invalid selector: ' + selector);
+    }
   },
   
   /**
   * Creates an XML HTTP Request (cross-browser)
   * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
+  * @return {XMLHttpRequest|ActiveXObject} the request object
   */
   createXHR: function() {
     var ids = ['MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'];
@@ -97,8 +154,12 @@ var helper = {
   * @param {String} [request.body] the request body
   * @param {Function} [request.onsuccess] the callback function 
   * executed on success (response code < 400)
+  * @param {XMLHttpRequest} request.onsuccess.xhr the XHR request
+  * @param {XMLHttpRequest} request.onsuccess.xhr.response the response body
   * @param {Function} [request.onerror] the callback function 
   * executed on error (response code >= 400)
+  * @param {XMLHttpRequest} request.onerror.xhr the XHR request
+  * @param {XMLHttpRequest} request.onerror.xhr.response the response body
   * @param {Boolean} [sync] if true the request is made synchronous
   * @example helper.fireXHR({method: 'POST', url: 'http://foo.bar'});
   */
