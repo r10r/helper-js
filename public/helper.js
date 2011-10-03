@@ -60,5 +60,72 @@ var helper = {
         }
       }
     }, true);
+  },
+  
+  /**
+  * Creates an XML HTTP Request (cross-browser)
+  * @see <a href="http://www.w3.org/TR/XMLHttpRequest/">W3C XMLHttpRequest</a>
+  */
+  createXHR: function() {
+    var ids = ['MSXML2.XMLHTTP.3.0', 'MSXML2.XMLHTTP', 'Microsoft.XMLHTTP'];
+    var xhr;
+    if (typeof window.XMLHttpRequest === 'function') {
+      xhr = new XMLHttpRequest();
+    } else {
+      for (var i = 0; i < ids.length; i++) {
+        try {
+          xhr = new ActiveXObject(ids[i]);
+          break;
+        } catch (e) {
+          alert(e);
+        }
+      }
+    }
+    return xhr;
+  },
+  
+  /**
+  * Creates and executes an XMLHttpRequest with the given request parameters.
+  * If the request successfully returns the onsuccess callback function is
+  * executed. Otherwise if the request returns with an error the onerror function
+  * is executed.
+  * 
+  * @param {Object} request the request object literal
+  * @param {String} request.method one of ['GET','PUT','POST','DELETE','HEAD']
+  * @param {String} request.url the request url
+  * @param {String} [request.headers] the request headers
+  * @param {String} [request.body] the request body
+  * @param {Function} [request.onsuccess] the callback function 
+  * for a response indicating success (response code < 400)
+  * @param {Function} [request.onerror] the callback function 
+  * for a response indicating an error (response code >= 400)
+  * @param {Boolean} [sync] if true the request is made synchronous
+  * @example helper.fireXHR({method: 'POST', url: 'http://foo.bar'});
+  */
+  fireXHR: function(request, sync) {
+    var xhr = this.createXHR();
+    var async = (sync == undefined) ? true : !sync;
+    xhr.open(request.method, request.url, async);
+    // set headers
+    if (request.headers != undefined) {
+      for (var propertyName in request.headers) {
+        xhr.setRequestHeader(propertyName, request.headers[propertyName]);
+      }
+    }
+    // callback handling
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4) {
+        var callback;
+        if (xhr.status < 400) {
+          callback = request.onsuccess;
+        } else {
+          callback = request.onerror;
+        }   
+        if (callback != undefined) {
+          callback(xhr);
+        }
+      }
+    }
+    xhr.send(request.body || '');
   }
 }
