@@ -15,14 +15,14 @@ var helper = {
   * Format the given string. The remaining arguments replace the format specifies in the given string.
   * The format specifiers are of the form '{0}', '{1}' ... '{xxxx}' 
   * The first remaining argument replaces all occurences of the format specifier '{0}' and so on ...
-  * @param {String} the format string
+  * @param {String} format the format string
   * @param {String[]} first value is the format string, remaining arguments are the format values
   * @returns the formated string
-  * @example >helper.toFormat('{0} {1}', 'Hello', 'World');
+  * @example >helper.format('{0} {1}', 'Hello', 'World');
   * 'Hello World'
   */
-  format: function(toFormat) {
-    var formatted = toFormat;
+  format: function(format) {
+    var formatted = format;
     for (var i = 1; i < arguments.length; i++) {
       var arg = i-1;
       var regexp = new RegExp('\\{' + arg + '\\}', 'gi');
