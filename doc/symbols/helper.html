@@ -68,6 +68,10 @@
              <ul>
                
                    <li>
+                        <a href="../symbols/helper.html#._encodeParameterHash">_encodeParameterHash</a>
+                    </li>
+               
+                   <li>
                         <a href="../symbols/helper.html#.bind">bind</a>
                     </li>
                
@@ -84,7 +88,15 @@
                     </li>
                
                    <li>
-                        <a href="../symbols/helper.html#.fireXHR">fireXHR</a>
+                        <a href="../symbols/helper.html#.doGet">doGet</a>
+                    </li>
+               
+                   <li>
+                        <a href="../symbols/helper.html#.doPost">doPost</a>
+                    </li>
+               
+                   <li>
+                        <a href="../symbols/helper.html#.doXHR">doXHR</a>
                     </li>
                
                    <li>
@@ -166,6 +178,44 @@
 				<div class="sectionTitle">
 					Method Detail
 				</div>
+				
+                  <div class="member">
+					<a name="._encodeParameterHash"> </a>
+					<div class="fixedFont">
+                      <div class="modifiers">&lt;private&gt; &lt;static&gt; 
+                      </div>
+					
+					<span class="light">helper.</span><b>_encodeParameterHash</b>(params)
+					
+					</div>
+					<div class="description">
+						
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<b>params</b>
+									
+								</dt>
+								<dd>the parameter hash</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+                  </div>
 				
                   <div class="member">
 					<a name=".bind"> </a>
@@ -397,12 +447,122 @@ identified by the given id.</p>
                   </div>
 				
                   <div class="member">
-					<a name=".fireXHR"> </a>
+					<a name=".doGet"> </a>
 					<div class="fixedFont">
                       <div class="modifiers">&lt;static&gt; 
                       </div>
 					
-					<span class="light">helper.</span><b>fireXHR</b>(request, sync)
+					<span class="light">helper.</span><b>doGet</b>(request, params, sync)
+					
+					</div>
+					<div class="description">
+						<p>Make a GET request. The given parameter hash is converted to
+a parameter string.</p>
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">helper.doGet({url: '/foo'}, {param1: 'bar'});</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>request</b>
+									
+								</dt>
+								<dd>the request literal</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>params</b>
+									
+								</dt>
+								<dd>the request parameters hash</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>sync</b>
+									
+								</dt>
+								<dd>if true request is made synchronous</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+                  </div>
+				
+                  <div class="member">
+					<a name=".doPost"> </a>
+					<div class="fixedFont">
+                      <div class="modifiers">&lt;static&gt; 
+                      </div>
+					
+					<span class="light">helper.</span><b>doPost</b>(request, params, sync)
+					
+					</div>
+					<div class="description">
+						<p>Make a POST request. The given parameter hash is converted to
+a parameter string.</p>
+						
+						
+					</div>
+					
+					
+					
+					<pre class="code">helper.doPost({url: '/foo'}, {param1: 'bar'});</pre>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>request</b>
+									
+								</dt>
+								<dd>the request literal</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Object}</span> <b>params</b>
+									
+								</dt>
+								<dd>the request parameters hash</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Boolean}</span> <b>sync</b>
+									
+								</dt>
+								<dd>if true request is made synchronous</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+                  </div>
+				
+                  <div class="member">
+					<a name=".doXHR"> </a>
+					<div class="fixedFont">
+                      <div class="modifiers">&lt;static&gt; 
+                      </div>
+					
+					<span class="light">helper.</span><b>doXHR</b>(request, sync)
 					
 					</div>
 					<div class="description">
@@ -663,7 +823,7 @@ them message is just put away.</p>
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both;text-align:center">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Oct 03 2011 20:56:47 GMT+0200 (CEST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Oct 03 2011 23:23:06 GMT+0200 (CEST)
 		</div>
 	</body>
 </html>
