@@ -91,14 +91,14 @@ var helper = {
   * is executed.
   * 
   * @param {Object} request the request object literal
-  * @param {String} request.method one of ['GET','PUT','POST','DELETE','HEAD']
+  * @param {String} request.method a valid HTTP request method (one of ['GET','PUT','POST','DELETE','HEAD'])
   * @param {String} request.url the request url
   * @param {String} [request.headers] the request headers
   * @param {String} [request.body] the request body
   * @param {Function} [request.onsuccess] the callback function 
-  * for a response indicating success (response code < 400)
+  * executed on success (response code < 400)
   * @param {Function} [request.onerror] the callback function 
-  * for a response indicating an error (response code >= 400)
+  * executed on error (response code >= 400)
   * @param {Boolean} [sync] if true the request is made synchronous
   * @example helper.fireXHR({method: 'POST', url: 'http://foo.bar'});
   */
