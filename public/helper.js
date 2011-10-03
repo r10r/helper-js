@@ -22,13 +22,13 @@ var helper = {
   * 'Hello World'
   */
   format: function(toFormat) {
-  	var formatted = toFormat;
+    var formatted = toFormat;
     for (var i = 1; i < arguments.length; i++) {
-  			var arg = i-1;
-  			var regexp = new RegExp('\\{' + arg + '\\}', 'gi');
-  			formatted = formatted.replace(regexp, arguments[i]);
+      var arg = i-1;
+      var regexp = new RegExp('\\{' + arg + '\\}', 'gi');
+      formatted = formatted.replace(regexp, arguments[i]);
     }
-  	return formatted;
+    return formatted;
   },
   
   /**
