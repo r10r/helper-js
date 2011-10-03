@@ -72,6 +72,14 @@
                     </li>
                
                    <li>
+                        <a href="../symbols/helper.html#.bindToClass">bindToClass</a>
+                    </li>
+               
+                   <li>
+                        <a href="../symbols/helper.html#.bindToId">bindToId</a>
+                    </li>
+               
+                   <li>
                         <a href="../symbols/helper.html#.createXHR">createXHR</a>
                     </li>
                
@@ -85,6 +93,10 @@
                
                    <li>
                         <a href="../symbols/helper.html#.log">log</a>
+                    </li>
+               
+                   <li>
+                        <a href="../symbols/helper.html#.setHTML">setHTML</a>
                     </li>
                
              </ul>
@@ -161,7 +173,7 @@
                       <div class="modifiers">&lt;static&gt; 
                       </div>
 					
-					<span class="light">helper.</span><b>bind</b>(eventType, cssClass, callback)
+					<span class="light">helper.</span><b>bind</b>(eventType, selector, callback)
 					
 					</div>
 					<div class="description">
@@ -177,7 +189,8 @@ the second parameter the event.</p>
 					
 					
 					
-					<pre class="code">helper.bind('click', 'foo', function(src, event){alert(src.innerHTML;)});</pre>
+					<pre class="code">helper.bind('click', '#foo', function(src, event){alert(src.innerHTML;)}); // by id
+helper.bind('click', '.foo', function(src, event){alert(src.innerHTML;)}); // by class</pre>
 					
 					
 					
@@ -192,10 +205,73 @@ the second parameter the event.</p>
 								<dd>the event to bind to e.g 'click'</dd>
 							
 								<dt>
+									<span class="light fixedFont">{String}</span> <b>selector</b>
+									
+								</dt>
+								<dd>the CSS selector for target, either a CSS class or an Id</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>callback</b>
+									
+								</dt>
+								<dd>function to execute for the event</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Node}</span> <b>callback.src</b>
+									
+								</dt>
+								<dd>the event source element</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Event}</span> <b>callback.event</b>
+									
+								</dt>
+								<dd>the event object</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+                  </div>
+				
+                  <div class="member">
+					<a name=".bindToClass"> </a>
+					<div class="fixedFont">
+                      <div class="modifiers">&lt;static&gt; 
+                      </div>
+					
+					<span class="light">helper.</span><b>bindToClass</b>(eventType, cssClass, callback)
+					
+					</div>
+					<div class="description">
+						<p>Bind the given callback function to a class of elements
+for the given event.</p>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>eventType</b>
+									
+								</dt>
+								<dd>eventType the event to bind to e.g 'click'</dd>
+							
+								<dt>
 									<span class="light fixedFont">{String}</span> <b>cssClass</b>
 									
 								</dt>
-								<dd>the CSS class of the source elements to handle</dd>
+								<dd>the class attribute of the target elements</dd>
 							
 								<dt>
 									<span class="light fixedFont">{Function}</span> <b>callback</b>
@@ -211,6 +287,71 @@ the second parameter the event.</p>
 						
 						
 						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>helper#bind</dd>
+							
+							</dl>
+						
+
+                  </div>
+				
+                  <div class="member">
+					<a name=".bindToId"> </a>
+					<div class="fixedFont">
+                      <div class="modifiers">&lt;static&gt; 
+                      </div>
+					
+					<span class="light">helper.</span><b>bindToId</b>(eventType, id, callback)
+					
+					</div>
+					<div class="description">
+						<p>Bind the given callback function to a single element 
+identified by the given id.</p>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>eventType</b>
+									
+								</dt>
+								<dd>eventType the event to bind to e.g 'click'</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>id</b>
+									
+								</dt>
+								<dd>the id attribute of the target element</dd>
+							
+								<dt>
+									<span class="light fixedFont">{Function}</span> <b>callback</b>
+									
+								</dt>
+								<dd>function to execute for the event</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+							<dl class="detailList">
+							<dt class="heading">See:</dt>
+							
+								<dd>helper#bind</dd>
+							
+							</dl>
+						
 
                   </div>
 				
@@ -219,7 +360,7 @@ the second parameter the event.</p>
 					<div class="fixedFont">
                       <div class="modifiers">&lt;static&gt; 
                       </div>
-					
+					<span class="light">{XMLHttpRequest|ActiveXObject}</span>
 					<span class="light">helper.</span><b>createXHR</b>()
 					
 					</div>
@@ -235,6 +376,13 @@ the second parameter the event.</p>
 						
 						
 						
+						
+							<dl class="detailList">
+							<dt class="heading">Returns:</dt>
+							
+								<dd><span class="light fixedFont">{XMLHttpRequest|ActiveXObject}</span> the request object</dd>
+							
+							</dl>
 						
 						
 						
@@ -314,11 +462,35 @@ is executed.</p>
 executed on success (response code < 400)</dd>
 							
 								<dt>
+									<span class="light fixedFont">{XMLHttpRequest}</span> <b>request.onsuccess.xhr</b>
+									
+								</dt>
+								<dd>the XHR request</dd>
+							
+								<dt>
+									<span class="light fixedFont">{XMLHttpRequest}</span> <b>request.onsuccess.xhr.response</b>
+									
+								</dt>
+								<dd>the response body</dd>
+							
+								<dt>
 									<span class="light fixedFont">{Function}</span> <b>request.onerror</b>
 									<i>Optional</i>
 								</dt>
 								<dd>the callback function 
 executed on error (response code >= 400)</dd>
+							
+								<dt>
+									<span class="light fixedFont">{XMLHttpRequest}</span> <b>request.onerror.xhr</b>
+									
+								</dt>
+								<dd>the XHR request</dd>
+							
+								<dt>
+									<span class="light fixedFont">{XMLHttpRequest}</span> <b>request.onerror.xhr.response</b>
+									
+								</dt>
+								<dd>the response body</dd>
 							
 								<dt>
 									<span class="light fixedFont">{Boolean}</span> <b>sync</b>
@@ -435,6 +607,50 @@ them message is just put away.</p>
 
                   </div>
 				
+                  <div class="member">
+					<a name=".setHTML"> </a>
+					<div class="fixedFont">
+                      <div class="modifiers">&lt;static&gt; 
+                      </div>
+					
+					<span class="light">helper.</span><b>setHTML</b>(id, html)
+					
+					</div>
+					<div class="description">
+						<p>Set the innerHTML of the element with the given id</p>
+						
+						
+					</div>
+					
+					
+					
+						
+							<dl class="detailList">
+							<dt class="heading">Parameters:</dt>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>id</b>
+									
+								</dt>
+								<dd>the element id</dd>
+							
+								<dt>
+									<span class="light fixedFont">{String}</span> <b>html</b>
+									
+								</dt>
+								<dd>the content to set</dd>
+							
+							</dl>
+						
+						
+						
+						
+						
+						
+						
+
+                  </div>
+				
               </div>
 			
 			
@@ -447,7 +663,7 @@ them message is just put away.</p>
 <!-- ============================== footer ================================= -->
 		<div class="fineprint" style="clear:both;text-align:center">
 			
-			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Oct 03 2011 19:22:56 GMT+0200 (CEST)
+			Documentation generated by <a href="http://code.google.com/p/jsdoc-toolkit/" target="_blank">JsDoc Toolkit</a> 2.4.0 on Mon Oct 03 2011 20:56:47 GMT+0200 (CEST)
 		</div>
 	</body>
 </html>
