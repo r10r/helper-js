@@ -1,7 +1,9 @@
+/** @namespace */
 var helper = {
   /**
   * If a console is defined (e.g: firebug, chrome developer tools) it
-  * logs out the given message to the console
+  * logs out the given message to the console.
+  * @param {String} message the message
   */
   log: function(message) {
     if (window.console) {
@@ -13,7 +15,11 @@ var helper = {
   * Format the given string. The remaining arguments replace the format specifies in the given string.
   * The format specifiers are of the form '{0}', '{1}' ... '{xxxx}' 
   * The first remaining argument replaces all occurences of the format specifier '{0}' and so on ...
-  * @toFormat {String} the string to format 
+  * @param {String} the format string
+  * @param {String[]} first value is the format string, remaining arguments are the format values
+  * @returns the formated string
+  * @example >helper.toFormat('{0} {1}', 'Hello', 'World');
+  * 'Hello World'
   */
   format: function(toFormat) {
   	var formatted = toFormat;
@@ -30,10 +36,13 @@ var helper = {
   * to the window object. The given callback function is
   * executed if the event source element class 
   * attribute matches the given CSS class.
-  * The first parameter of the callback function is source element,
+  * The first parameter of the callback function is the source element,
   * the second parameter the event.
-  *
-  * helper.addEventListener('click', 'foo', function(src, event){alert(src.innerHTML;)});
+
+  * @param {String} eventType the event to bind to e.g 'click'
+  * @param {String} cssClass the CSS class of the source elements to handle
+  * @param {Function} callback function to execute for the event
+  * @example helper.bind('click', 'foo', function(src, event){alert(src.innerHTML;)});
   */
   bind: function(eventType, cssClass, callback) {
     window.addEventListener('click', function(event) {
