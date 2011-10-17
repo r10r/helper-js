@@ -241,5 +241,36 @@
 <span class='line'>234</span>     </span><span class="NAME">request.headers</span><span class="PUNC">[</span><span class="STRN">"Content-Type"</span><span class="PUNC">]</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="STRN">"application/x-www-form-urlencoded"</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>235</span> </span><span class="WHIT">    </span><span class="NAME">request.body</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">this._encodeParameterHash</span><span class="PUNC">(</span><span class="NAME">params</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
 <span class='line'>236</span> </span><span class="WHIT">    </span><span class="KEYW">return</span><span class="WHIT"> </span><span class="NAME">this.doXHR</span><span class="PUNC">(</span><span class="NAME">request</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">sync</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
-<span class='line'>237</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
-<span class='line'>238</span> </span><span class="PUNC">}</span></pre></body></html>
+<span class='line'>237</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="PUNC">,</span><span class="WHIT">
+<span class='line'>238</span> </span><span class="WHIT">  
+<span class='line'>239</span>   </span><span class="COMM">/**
+<span class='line'>240</span>   * Set the focus for the input element with the given id 
+<span class='line'>241</span>   * and put the cursor at the end of the input.
+<span class='line'>242</span>   * 
+<span class='line'>243</span>   * @param {String} id the id of the target element
+<span class='line'>244</span>   * @example helper.setCursorToEnd('myinput');
+<span class='line'>245</span>   */</span><span class="WHIT">
+<span class='line'>246</span> </span><span class="WHIT">  </span><span class="NAME">selectEnd</span><span class="PUNC">:</span><span class="WHIT"> </span><span class="KEYW">function</span><span class="PUNC">(</span><span class="NAME">id</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>247</span> </span><span class="WHIT">    </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">element</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">document.getElementById</span><span class="PUNC">(</span><span class="NAME">id</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>248</span> </span><span class="WHIT">    
+<span class='line'>249</span>     </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>250</span> </span><span class="WHIT">      </span><span class="NAME">element.focus</span><span class="PUNC">(</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>251</span> </span><span class="WHIT">       </span><span class="COMM">// If this function exists...</span><span class="WHIT">
+<span class='line'>252</span> </span><span class="WHIT">      </span><span class="KEYW">if</span><span class="WHIT"> </span><span class="PUNC">(</span><span class="NAME">element.setSelectionRange</span><span class="PUNC">)</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>253</span> </span><span class="WHIT">      </span><span class="COMM">// ... then use it (Doesn't work in IE)</span><span class="WHIT">
+<span class='line'>254</span> </span><span class="WHIT">      </span><span class="COMM">// Double the length because Opera is inconsistent about whether </span><span class="WHIT">
+<span class='line'>255</span> </span><span class="WHIT">      </span><span class="COMM">// a carriage return is one character or two. Sigh.</span><span class="WHIT">
+<span class='line'>256</span> </span><span class="WHIT">        </span><span class="KEYW">var</span><span class="WHIT"> </span><span class="NAME">len</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">element.value.length</span><span class="WHIT"> </span><span class="PUNC">*</span><span class="WHIT"> </span><span class="NUMB">2</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>257</span> </span><span class="WHIT">        </span><span class="NAME">element.setSelectionRange</span><span class="PUNC">(</span><span class="NAME">len</span><span class="PUNC">,</span><span class="WHIT"> </span><span class="NAME">len</span><span class="PUNC">)</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>258</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="WHIT"> </span><span class="KEYW">else</span><span class="WHIT"> </span><span class="PUNC">{</span><span class="WHIT">
+<span class='line'>259</span> </span><span class="WHIT">      </span><span class="COMM">// ... otherwise replace the contents with itself</span><span class="WHIT">
+<span class='line'>260</span> </span><span class="WHIT">      </span><span class="COMM">// (Doesn't work in Google Chrome)</span><span class="WHIT">
+<span class='line'>261</span> </span><span class="WHIT">        </span><span class="NAME">element.value</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NAME">element.value</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>262</span> 
+<span class='line'>263</span> </span><span class="WHIT">        </span><span class="COMM">// Scroll to the bottom, in case we're in a tall textarea</span><span class="WHIT">
+<span class='line'>264</span> </span><span class="WHIT">        </span><span class="COMM">// (Necessary for Firefox and Google Chrome)</span><span class="WHIT">
+<span class='line'>265</span> </span><span class="WHIT">        </span><span class="NAME">element.scrollTop</span><span class="WHIT"> </span><span class="PUNC">=</span><span class="WHIT"> </span><span class="NUMB">999999</span><span class="PUNC">;</span><span class="WHIT">
+<span class='line'>266</span> </span><span class="WHIT">      </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>267</span> </span><span class="WHIT">    </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>268</span> </span><span class="WHIT">  </span><span class="PUNC">}</span><span class="WHIT">
+<span class='line'>269</span> </span><span class="PUNC">}</span></pre></body></html>
