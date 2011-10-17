@@ -1,0 +1,29 @@
+<script type="text/javascript" src="/helper.js"></script>
+
+<input type="text" id="some_input" value="not focused"></input>
+<br />
+<input type="text" id="non_empty_input" value="focused"></input>
+<button id="focus_non_empty">focus input</button>
+<br />
+<input type="text" id="empty_input"></input>
+<button id="focus_empty">focus input</button>
+<br />
+<button id="focus_textarea">focus textarea</button>
+<br />
+<textarea id="my_textarea" rows="60">
+  <%= Lorem::Base.new('paragraphs', 30).output %>
+</textarea>
+
+<script type="text/javascript">
+  helper.bind('click', '#focus_non_empty', function(src) {
+    helper.selectEnd('non_empty_input');
+  });
+  
+  helper.bind('click', '#focus_empty', function(src) {
+    helper.selectEnd('empty_input');
+  });
+  
+  helper.bind('click', '#focus_textarea', function(src) {
+    helper.selectEnd('my_textarea');
+  });
+</script>
