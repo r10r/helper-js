@@ -237,11 +237,11 @@ var helper = {
   },
   
   /**
-  * Set the focus for the input element with the given id 
-  * and put the cursor at the end of the input.
+  * Focus the input element with the given id 
+  * and set the cursor to the end of the input.
   * 
   * @param {String} id the id of the target element
-  * @example helper.setCursorToEnd('myinput');
+  * @example helper.selectEnd('myinput');
   */
   selectEnd: function(id) {
     var element = document.getElementById(id);
