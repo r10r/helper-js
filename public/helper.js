@@ -234,5 +234,36 @@ var helper = {
     request.headers["Content-Type"] = "application/x-www-form-urlencoded";
     request.body = this._encodeParameterHash(params);
     return this.doXHR(request, sync);
+  },
+  
+  /**
+  * Set the focus for the input element with the given id 
+  * and put the cursor at the end of the input.
+  * 
+  * @param {String} id the id of the target element
+  * @example helper.setCursorToEnd('myinput');
+  */
+  selectEnd: function(id) {
+    var element = document.getElementById(id);
+    
+    if (element) {
+      element.focus();
+       // If this function exists...
+      if (element.setSelectionRange) {
+      // ... then use it (Doesn't work in IE)
+      // Double the length because Opera is inconsistent about whether 
+      // a carriage return is one character or two. Sigh.
+        var len = element.value.length * 2;
+        element.setSelectionRange(len, len);
+      } else {
+      // ... otherwise replace the contents with itself
+      // (Doesn't work in Google Chrome)
+        element.value = element.value;
+
+        // Scroll to the bottom, in case we're in a tall textarea
+        // (Necessary for Firefox and Google Chrome)
+        element.scrollTop = 999999;
+      }
+    }
   }
 }
