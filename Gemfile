@@ -4,3 +4,4 @@ gem "sinatra", "~>1.2.6"
 gem "tilt", '= 1.2.2' 
 gem "packr", "~> 3.1.1"
 gem "lorem"
+gem "yui-compressor"

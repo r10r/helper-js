@@ -1,7 +1,12 @@
 GEM
   remote: http://rubygems.org/
   specs:
+    POpen4 (0.1.4)
+      Platform (>= 0.4.0)
+      open4
+    Platform (0.4.0)
     lorem (0.1.2)
+    open4 (1.2.0)
     oyster (0.9.5)
     packr (3.1.1)
       oyster (>= 0.9.5)
@@ -10,6 +15,8 @@ GEM
       rack (~> 1.1)
       tilt (>= 1.2.2, < 2.0)
     tilt (1.2.2)
+    yui-compressor (0.9.6)
+      POpen4 (>= 0.1.4)
 
 PLATFORMS
   ruby
@@ -19,3 +26,4 @@ DEPENDENCIES
   packr (~> 3.1.1)
   sinatra (~> 1.2.6)
   tilt (= 1.2.2)
+  yui-compressor

@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'jsmin_c'
 require 'yui/compressor'
 
 desc 'minify the javascript'
