@@ -237,32 +237,37 @@ var helper = {
   },
   
   /**
-  * Focus the input element with the given id 
-  * and set the cursor to the end of the input.
+  * Focus the input element with the given id and set the cursor to the end of the input.
+  * Works with text areas too, scrolls to the bottom if required.
   * 
   * @param {String} id the id of the target element
-  * @example helper.selectEnd('myinput');
+  * @example helper.selectInputEnd('myinput');
   */
-  selectEnd: function(id) {
+  selectInputEnd: function(id) {
     var element = document.getElementById(id);
     
     if (element) {
       element.focus();
-       // If this function exists...
+      
+      // Scroll to the bottom, in case we're in a tall textarea
+      // (Necessary for Firefox and Google Chrome)
+      if (element.tagName.toUpperCase() == 'TEXTAREA') {
+        element.scrollTop = 999999;
+      }
+      
+      // If this function exists...
       if (element.setSelectionRange) {
-      // ... then use it (Doesn't work in IE)
-      // Double the length because Opera is inconsistent about whether 
-      // a carriage return is one character or two. Sigh.
+        this.log('using selection range');
+        // ... then use it (Doesn't work in IE)
+        // Double the length because Opera is inconsistent about whether 
+        // a carriage return is one character or two. Sigh.
         var len = element.value.length * 2;
         element.setSelectionRange(len, len);
       } else {
-      // ... otherwise replace the contents with itself
-      // (Doesn't work in Google Chrome)
+        this.log('using self-replace');
+        // ... otherwise replace the contents with itself
+        // (Doesn't work in Google Chrome)
         element.value = element.value;
-
-        // Scroll to the bottom, in case we're in a tall textarea
-        // (Necessary for Firefox and Google Chrome)
-        element.scrollTop = 999999;
       }
     }
   }
