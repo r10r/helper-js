@@ -257,14 +257,12 @@ var helper = {
       
       // If this function exists...
       if (element.setSelectionRange) {
-        this.log('using selection range');
         // ... then use it (Doesn't work in IE)
         // Double the length because Opera is inconsistent about whether 
         // a carriage return is one character or two. Sigh.
         var len = element.value.length * 2;
         element.setSelectionRange(len, len);
       } else {
-        this.log('using self-replace');
         // ... otherwise replace the contents with itself
         // (Doesn't work in Google Chrome)
         element.value = element.value;
