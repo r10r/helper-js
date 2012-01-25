@@ -1,7 +1,6 @@
 $:<<(File.join(File.dirname(__FILE__), 'lib'))
 
 require 'rubygems' # required for ruby 1.8 and jruby
-gem 'tilt','=1.2.2' # sinatra erb support doesn't work with tilt 1.3.x
 require 'mongo'
 require 'sinatra'
 require 'lorem'
