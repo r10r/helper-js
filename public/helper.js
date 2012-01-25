@@ -36,11 +36,40 @@ var helper = {
   
   /**
   * Set the innerHTML of the element with the given id
+  *
   * @param {String} id the element id
   * @param {String} html the content to set
   */
   setHTML: function(id, html) {
     document.getElementById(id).innerHTML = html;
+  },
+  
+  /**
+  * @returns the source element for the event source 
+  */
+  _getEventSource: function(event) {
+		return event.srcElement || event.target;
+  },
+  
+	/**
+  * Cross-Browser event binding method.
+  *
+  * @param {Node} element the target element on which the event handler is bound
+  * @param {String}  eventType the event to bind to e.g 'click'
+  * @param {Function} eventHandler the event handler to bind
+  */
+  _bind: function(element, eventType, eventHandler) {
+  	// if bound is true the event was sucessfully bound
+  	var bound;
+  	if (element.addEventListener) {
+  		// chromium
+			bound = element.addEventListener(eventType, eventHandler, true);
+		} else if (element.attachEvent){
+			// IE, events have to start with 'on'
+			bound = element.attachEvent('on' + eventType, eventHandler);
+		} else {
+		 	this.log(this.format('failed to bind handler[{1}] for event[{0}] to element[{2}]', eventType, eventHandler, element));
+		}
   },
   
   /**
@@ -52,18 +81,24 @@ var helper = {
   * @see helper#bind
   */
   bindToClass: function(eventType, cssClass, callback) {
-    window.addEventListener(eventType, function(event) {
-        var src = event.srcElement;
+  	var eventHandler = function(event) {
+  			var src = helper._getEventSource(event);
         if (src.getAttribute) {
-          var value = src.getAttribute('class');
+          var value = src.getAttribute('class') || src.getAttribute('classname');
           if (value) {
             var classes = value.split(/ +/);
-            if (classes.indexOf(cssClass) > -1) {
-              callback(src, event);
+            // don't use indexOf since it is not available in IE
+            for(var i=0; i<classes.length; i++){
+            	if (classes[i] == cssClass) {
+            		callback(src, event);
+            		break;
+            	}
             }
           }
         }
-      }, true);
+      };
+    var body = document.getElementsByTagName('body')[0];
+		this._bind(body, eventType, eventHandler);
   },
   
   /**
@@ -75,13 +110,14 @@ var helper = {
   * @param {Function} callback function to execute for the event
   * @see helper#bind
   */
-  bindToId: function(eventType, id, callback) {
+	bindToId: function(eventType, id, callback) {
     var target = document.getElementById(id);
     if (target) {
-      target.addEventListener(eventType, function(event) {
-        var src = event.srcElement;
-        callback(src, event);
-      }, true);
+		  var eventHandler = function(event) {
+		    var src = helper._getEventSource(event);
+		    callback(src, event);
+		  };
+    	this._bind(target, eventType, eventHandler);
     } else {
       this.log(this.format('bindToId() element with id[{0}] does not exist!', id));
     }
